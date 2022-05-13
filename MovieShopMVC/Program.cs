@@ -1,7 +1,18 @@
+using ApplicationCore.Contracts.Repositories;
+using ApplicationCore.Contracts.Services;
+using Infrastructure.Services;
+using Infrasturcture.Repositories;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+//.NET Core has buildin Depedency Injection, first class citizen in .NET Core
+builder.Services.AddScoped<IMovieService, MovieService>();
+builder.Services.AddScoped<IMovieRepository, MovieRepository>();
+
+// odler .NET Framework, then to do DI we had to rely on 3rd party libraties such as Autofac, Ninject
 
 var app = builder.Build();
 
