@@ -4,6 +4,7 @@ using Infrasturcture.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrasturcture.Migrations
 {
     [DbContext(typeof(MovieShopDbContext))]
-    partial class MovieShopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220516171442_updatingReviewTable")]
+    partial class updatingReviewTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,19 +32,19 @@ namespace Infrasturcture.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("Gender")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("Gender")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Name")
+                    b.Property<int?>("Name")
                         .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("int");
 
-                    b.Property<string>("ProfilePath")
+                    b.Property<int?>("ProfilePath")
                         .HasMaxLength(2048)
-                        .HasColumnType("nvarchar(2048)");
+                        .HasColumnType("int");
 
-                    b.Property<string>("TmdbUrl")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("TmdbUrl")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -74,29 +76,6 @@ namespace Infrasturcture.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Crew");
-                });
-
-            modelBuilder.Entity("ApplicationCore.Entities.Favorite", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("MovieId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MovieId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Favorite");
                 });
 
             modelBuilder.Entity("ApplicationCore.Entities.Genre", b =>
@@ -289,8 +268,8 @@ namespace Infrasturcture.Migrations
                     b.Property<int>("MovieId")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Rating")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int>("Rating")
+                        .HasColumnType("int");
 
                     b.Property<string>("ReviewText")
                         .HasColumnType("nvarchar(max)");
@@ -416,21 +395,6 @@ namespace Infrasturcture.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("UserRole", (string)null);
-                });
-
-            modelBuilder.Entity("ApplicationCore.Entities.Favorite", b =>
-                {
-                    b.HasOne("ApplicationCore.Entities.Movie", null)
-                        .WithMany("Favorites")
-                        .HasForeignKey("MovieId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ApplicationCore.Entities.User", null)
-                        .WithMany("Favorites")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("ApplicationCore.Entities.MovieCast", b =>
@@ -567,8 +531,6 @@ namespace Infrasturcture.Migrations
 
             modelBuilder.Entity("ApplicationCore.Entities.Movie", b =>
                 {
-                    b.Navigation("Favorites");
-
                     b.Navigation("MoviesOfCast");
 
                     b.Navigation("MoviesOfCrew");
@@ -589,8 +551,6 @@ namespace Infrasturcture.Migrations
 
             modelBuilder.Entity("ApplicationCore.Entities.User", b =>
                 {
-                    b.Navigation("Favorites");
-
                     b.Navigation("Perchases");
 
                     b.Navigation("Reviews");

@@ -4,6 +4,7 @@ using Infrasturcture.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrasturcture.Migrations
 {
     [DbContext(typeof(MovieShopDbContext))]
-    partial class MovieShopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220516172057_UpdatingFavoriteTable")]
+    partial class UpdatingFavoriteTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,19 +32,19 @@ namespace Infrasturcture.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("Gender")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("Gender")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Name")
+                    b.Property<int?>("Name")
                         .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("int");
 
-                    b.Property<string>("ProfilePath")
+                    b.Property<int?>("ProfilePath")
                         .HasMaxLength(2048)
-                        .HasColumnType("nvarchar(2048)");
+                        .HasColumnType("int");
 
-                    b.Property<string>("TmdbUrl")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("TmdbUrl")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
