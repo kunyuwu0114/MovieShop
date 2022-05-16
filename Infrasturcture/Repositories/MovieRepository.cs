@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Infrasturcture.Repositories
 {
-    public class MovieRepository : IMovieRepository
+    public class MovieRepository : Repository<Movie>, IMovieRepository
     {
         public List<Movie> GetTop30GrossingMovies()
         {
