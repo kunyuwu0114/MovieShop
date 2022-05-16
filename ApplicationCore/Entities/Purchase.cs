@@ -14,7 +14,8 @@ namespace ApplicationCore.Entities
         public int Id { get; set; }
         [ForeignKey("User")]
         public int UserId { get; set; }
-        public int PurchaseNumber { get; set; }
+
+        public Guid PurchaseNumber { get; set; }
         [RegularExpression(@"^\d+\.\d{0,2}$")]
         [Range(0, 9999999999999999.99)]
         public decimal TotalPrice { get; set; }
