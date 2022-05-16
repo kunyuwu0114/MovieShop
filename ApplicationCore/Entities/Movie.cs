@@ -49,5 +49,7 @@ namespace ApplicationCore.Entities
 
         public ICollection<MovieCast> MoviesOfCast { get; set; }
 
+        public ICollection<Purchase> Perchases { get; set; }
+
     }
 }
