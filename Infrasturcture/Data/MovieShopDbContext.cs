@@ -22,12 +22,15 @@ namespace Infrasturcture.Data
         public DbSet<MovieGenre> MovieGenres { get; set; }
         public DbSet<Crew> Crews { get; set; }
         public DbSet<MovieCrew> MovieCrews { get; set; }
+        public DbSet<Cast> Casts { get; set; }
+        public DbSet<MovieCast> MovieCasts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Genre>(ConfigureGenre);
             modelBuilder.Entity<MovieGenre>(ConfigureMovieGenre);
             modelBuilder.Entity<MovieCrew>(ConfigureMovieCrew);
+            modelBuilder.Entity<MovieCast>(ConfigureMovieCast);
         }
 
         private void ConfigureMovieGenre(EntityTypeBuilder<MovieGenre> builder)
@@ -50,6 +53,13 @@ namespace Infrasturcture.Data
             builder.ToTable("MovieCrew");
             builder.HasKey(mg => new { mg.MovieId, mg.CrewId, mg.Department, mg.Job });
         }
+
+        private void ConfigureMovieCast(EntityTypeBuilder<MovieCast> builder)
+        {
+            builder.ToTable("MovieCast");
+            builder.HasKey(mg => new { mg.MovieId, mg.CastId, mg.Character});
+        }
+
 
     }
 }

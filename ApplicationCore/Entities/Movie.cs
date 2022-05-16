@@ -45,5 +45,9 @@ namespace ApplicationCore.Entities
 
         public ICollection<MovieGenre> MoviesOfGenre { get; set; }
 
+        public ICollection<MovieCrew> MoviesOfCrew { get; set; }
+
+        public ICollection<MovieCast> MoviesOfCast { get; set; }
+
     }
 }

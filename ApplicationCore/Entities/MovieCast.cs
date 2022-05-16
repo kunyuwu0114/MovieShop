@@ -8,15 +8,15 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Entities
 {
-    [Table("Trailer")]
-    public class Trailer
+    [Table("MovieCast")]
+    public class MovieCast
     {
-        public int Id { get; set; }
         public int MovieId { get; set; }
-        [MaxLength(2048)]
-        public string? TrailerUrl { get; set; }
-        [MaxLength(2048)]
-        public string? Name { get; set; }
+        public int CastId { get; set; }
+        [MaxLength(450)]
+        public string Character { get; set; }
+
         public Movie Movie { get; set; }
+        public Cast Cast { get; set; }
     }
 }
