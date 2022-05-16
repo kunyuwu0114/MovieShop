@@ -4,6 +4,7 @@ using Infrasturcture.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrasturcture.Migrations
 {
     [DbContext(typeof(MovieShopDbContext))]
-    partial class MovieShopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220516163203_CreatingRolesTable")]
+    partial class CreatingRolesTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -326,21 +328,6 @@ namespace Infrasturcture.Migrations
                     b.ToTable("User");
                 });
 
-            modelBuilder.Entity("ApplicationCore.Entities.UserRole", b =>
-                {
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RoleId")
-                        .HasColumnType("int");
-
-                    b.HasKey("UserId", "RoleId");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("UserRole", (string)null);
-                });
-
             modelBuilder.Entity("ApplicationCore.Entities.MovieCast", b =>
                 {
                     b.HasOne("ApplicationCore.Entities.Cast", "Cast")
@@ -409,25 +396,6 @@ namespace Infrasturcture.Migrations
                     b.Navigation("Movie");
                 });
 
-            modelBuilder.Entity("ApplicationCore.Entities.UserRole", b =>
-                {
-                    b.HasOne("ApplicationCore.Entities.Role", "Role")
-                        .WithMany("UserOfRole")
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ApplicationCore.Entities.User", "User")
-                        .WithMany("UserOfRole")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Role");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("ApplicationCore.Entities.Cast", b =>
                 {
                     b.Navigation("MoviesOfCast");
@@ -452,16 +420,6 @@ namespace Infrasturcture.Migrations
                     b.Navigation("MoviesOfGenre");
 
                     b.Navigation("Trailers");
-                });
-
-            modelBuilder.Entity("ApplicationCore.Entities.Role", b =>
-                {
-                    b.Navigation("UserOfRole");
-                });
-
-            modelBuilder.Entity("ApplicationCore.Entities.User", b =>
-                {
-                    b.Navigation("UserOfRole");
                 });
 #pragma warning restore 612, 618
         }
