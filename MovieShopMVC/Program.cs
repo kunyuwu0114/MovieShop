@@ -1,7 +1,9 @@
 using ApplicationCore.Contracts.Repositories;
 using ApplicationCore.Contracts.Services;
 using Infrastructure.Services;
+using Infrasturcture.Data;
 using Infrasturcture.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +15,15 @@ builder.Services.AddScoped<IMovieService, MovieService>();
 builder.Services.AddScoped<IMovieRepository, MovieRepository>();
 
 // odler .NET Framework, then to do DI we had to rely on 3rd party libraties such as Autofac, Ninject
+
+
+//Inject DbContextOptions with connection string into MovieShopDbContext
+builder.Services.AddDbContext<MovieShopDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("MovieShopDbConnection"));
+
+});
+
 
 var app = builder.Build();
 
